@@ -1,17 +1,17 @@
-const connection = require('./database/connection');
-const {QueryTypes} = require
 
+const UserModel = require('./models/UserModel');
 
-async function execute() {
-    const resultado = await connection.query('DESCRIBE produtos', {
-        type: QueryTypes.DESCRIBE
-    });
+// UserModel.create({
+//     id: 2,
+//     firstname: "Lucius",
+//     lastname: "Machado",
+//     email: "luciushebert13@gmail.com",
+//     password: "cuida",
+//     }
+// );
 
-    const produtos = await connection.query('SELECT * FROM produtos WHERE id = 1', {
-        type: QueryTypes.SELECT
-    });
-    
-    console.log(produtos)
-}
-
-execute();
+UserModel.destroy({
+    where: {
+        id: 2
+    }
+})
