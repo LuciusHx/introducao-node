@@ -2,24 +2,22 @@ const express = require('express');
 const app = express();
 app.use(express.json())
 
-const ProductModel = require('./models/ProductsModel')
-const UserModel = require('./models/UserModel')
+const UserController = require('./controllers/UserControll');
+const ProductsController = require('./controllers/ProductsController');
 
-app.get('/products', async function(request, response){
-    const products = await ProductModel.findAll();
-    response.json(products);
-})
+//Products~
+app.post('/products', ProductsController.create);
+app.get('/products', ProductsController.list);
+app.put('/products/:id', ProductsController.update)
+app.delete('/productsDelete/:id', ProductsController.delete);
 
-app.get('/users', async function(request, response){
-    const users = await UserModel.findAll();
-    response.json(users);
-})
-app.post('/users', async function(request, response){
-    UserModel.create(request.body);
-    return response.json({
-        message: "Usuário criado com sucesso!"
-    });
-})
+
+//Users
+app.post('/users', UserController.create);
+app.get('/users', UserController.list);
+app.put('/users/:id', UserController.update)
+app.delete('/usersDelete/:id', UserController.delete);
+
 
 
 
