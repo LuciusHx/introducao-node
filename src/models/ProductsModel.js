@@ -1,8 +1,19 @@
 const connection = require('../database/connection');
 const {DataTypes} = require('sequelize');
+const UserModel = require('./UserModel');
 
 let ProductModel = connection.define("Product",
     {
+        user_id: {
+            type: DataTypes.INTEGER, 
+            allowNull: false,
+            references: {
+                model: UserModel,
+                key: 'id'
+            },
+            onDelete: 'CASCADE'
+
+        },
         name: {
             type: DataTypes.STRING(255), //firstname VARCHAR(50)
             allowNull: false,
